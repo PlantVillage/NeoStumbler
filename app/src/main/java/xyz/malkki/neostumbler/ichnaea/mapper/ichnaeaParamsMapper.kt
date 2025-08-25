@@ -6,10 +6,11 @@ import kotlinx.coroutines.flow.map
 import xyz.malkki.neostumbler.constants.PreferenceKeys
 import xyz.malkki.neostumbler.data.settings.Settings
 import xyz.malkki.neostumbler.ichnaea.IchnaeaParams
+import xyz.malkki.neostumbler.ichnaea.IchnaeaParams.Companion.DEFAULT_PATH
 
 fun Settings.getIchnaeaParamsFlow(): Flow<IchnaeaParams?> =
     getSnapshotFlow().map { prefs ->
-        val baseUrl = prefs.getString(PreferenceKeys.GEOSUBMIT_ENDPOINT)
+        val baseUrl = prefs.getString(PreferenceKeys.GEOSUBMIT_ENDPOINT) ?: DEFAULT_PATH
         val submissionPath =
             prefs.getString(PreferenceKeys.GEOSUBMIT_PATH) ?: IchnaeaParams.DEFAULT_SUBMISSION_PATH
         val locatePath =

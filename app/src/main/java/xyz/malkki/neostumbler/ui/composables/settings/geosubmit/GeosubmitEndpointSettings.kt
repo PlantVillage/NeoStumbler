@@ -27,6 +27,7 @@ import xyz.malkki.neostumbler.R
 import xyz.malkki.neostumbler.constants.PreferenceKeys
 import xyz.malkki.neostumbler.data.settings.Settings
 import xyz.malkki.neostumbler.ichnaea.IchnaeaParams
+import xyz.malkki.neostumbler.ichnaea.IchnaeaParams.Companion.DEFAULT_PATH
 import xyz.malkki.neostumbler.ichnaea.mapper.getIchnaeaParamsFlow
 import xyz.malkki.neostumbler.ui.composables.settings.ParamField
 import xyz.malkki.neostumbler.ui.composables.settings.SettingsItem
@@ -85,7 +86,7 @@ private fun GeosubmitEndpointDialog(
     currentParams: IchnaeaParams?,
     onDialogClose: (IchnaeaParams?) -> Unit,
 ) {
-    val endpoint = rememberSaveable { mutableStateOf(currentParams?.baseUrl) }
+    val endpoint = rememberSaveable { mutableStateOf<String?>(currentParams?.baseUrl ?: DEFAULT_PATH)  }
 
     val geosubmitPath = rememberSaveable {
         mutableStateOf<String?>(
