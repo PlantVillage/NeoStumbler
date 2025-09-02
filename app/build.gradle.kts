@@ -28,7 +28,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "xyz.malkki.neostumbler"
+        applicationId = "coop.plantvillage.neostumbler"
         versionCode = 42
         versionName = "2.1.6"
 
@@ -117,7 +117,7 @@ android {
 
     applicationVariants.configureEach {
         if (buildType.isDebuggable) {
-            resValue("string", "app_name", "NeoStumbler (dev, $flavorName)")
+            resValue("string", "app_name", "PVStumbler (dev, $flavorName)")
         }
     }
 
