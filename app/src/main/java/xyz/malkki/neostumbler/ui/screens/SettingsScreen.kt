@@ -50,7 +50,7 @@ import xyz.malkki.neostumbler.ui.modifiers.handleDisplayCutouts
 
 @Composable
 private fun PlantVillageSettings() {
-    SettingsGroup(title="PlantVillage") {
+    SettingsGroup(title="PlantVillage+") {
         TextSetting(
             label = "name",
             key = PreferenceKeys.USERNAME,

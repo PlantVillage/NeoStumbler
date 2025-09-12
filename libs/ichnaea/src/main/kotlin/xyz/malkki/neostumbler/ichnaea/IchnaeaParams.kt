@@ -11,7 +11,7 @@ data class IchnaeaParams(
 ) {
     companion object {
 
-        const val DEFAULT_PATH = "http://plantvillage.psu.edu"
+        const val DEFAULT_PATH = "https://location-data.plantvillage.psu.edu"
         const val DEFAULT_SUBMISSION_PATH = "/v2/geosubmit"
         const val DEFAULT_LOCATE_PATH = "/v1/geolocate"
     }
