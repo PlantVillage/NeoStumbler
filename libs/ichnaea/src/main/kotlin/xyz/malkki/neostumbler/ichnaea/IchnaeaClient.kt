@@ -51,10 +51,12 @@ class IchnaeaClient(
                 "Failed to create URL from params $ichnaeaParams"
             }
 
+        val body = createGeosubmitRequestBody(reports)
+
         val request =
             Request.Builder()
                 .url(url)
-                .post(createGeosubmitRequestBody(reports))
+                .post(body)
                 .addHeader("Content-Encoding", "gzip")
                 .build()
 
