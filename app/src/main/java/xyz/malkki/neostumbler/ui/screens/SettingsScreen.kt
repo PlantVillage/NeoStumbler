@@ -145,13 +145,6 @@ private fun ScanningSettings() {
 private fun PrivacySettings() {
     SettingsGroup(title = stringResource(id = R.string.settings_group_privacy)) {
         WifiFilterSettings()
-
-        SettingsToggle(
-            title = stringResource(id = R.string.reduced_metadata_title),
-            description = stringResource(id = R.string.reduced_metadata_description),
-            preferenceKey = PreferenceKeys.REDUCED_METADATA,
-            default = false,
-        )
     }
 }
 

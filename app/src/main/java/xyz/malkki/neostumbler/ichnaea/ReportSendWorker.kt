@@ -87,8 +87,7 @@ class ReportSendWorker(appContext: Context, params: WorkerParameters) :
                 reportSaver = reportSaver,
             )
 
-        val sendWithReducedMetadata =
-            settings.getBooleanFlow(PreferenceKeys.REDUCED_METADATA, false).first()
+        val sendWithReducedMetadata = false;
 
         val reupload =
             inputData.hasKeyWithValueOfType<Long>(INPUT_REUPLOAD_FROM) &&
