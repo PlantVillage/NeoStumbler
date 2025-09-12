@@ -21,14 +21,11 @@ import androidx.core.content.ContextCompat
 import org.koin.compose.koinInject
 import xyz.malkki.neostumbler.R
 import xyz.malkki.neostumbler.constants.PreferenceKeys
-import xyz.malkki.neostumbler.data.settings.Settings
-import xyz.malkki.neostumbler.data.settings.getStringFlow
 import xyz.malkki.neostumbler.scanner.ScannerService
 import xyz.malkki.neostumbler.ui.composables.AboutNeoStumbler
 import xyz.malkki.neostumbler.ui.composables.ReportReuploadButton
 import xyz.malkki.neostumbler.ui.composables.settings.AutoScanToggle
 import xyz.malkki.neostumbler.ui.composables.settings.AutoUploadToggle
-import xyz.malkki.neostumbler.ui.composables.settings.CoverageLayerSettings
 import xyz.malkki.neostumbler.ui.composables.settings.CrashLogSettingsItem
 import xyz.malkki.neostumbler.ui.composables.settings.DbPruneSettings
 import xyz.malkki.neostumbler.ui.composables.settings.FusedLocationToggle
@@ -37,7 +34,6 @@ import xyz.malkki.neostumbler.ui.composables.settings.IgnoreScanThrottlingToggle
 import xyz.malkki.neostumbler.ui.composables.settings.LanguageSwitcher
 import xyz.malkki.neostumbler.ui.composables.settings.ManageStorageSettingsItem
 import xyz.malkki.neostumbler.ui.composables.settings.MovementDetectorSettings
-import xyz.malkki.neostumbler.ui.composables.settings.ParamField
 import xyz.malkki.neostumbler.ui.composables.settings.PassiveScanToggle
 import xyz.malkki.neostumbler.ui.composables.settings.ScannerNotificationStyleSettings
 import xyz.malkki.neostumbler.ui.composables.settings.SettingsGroup
@@ -76,7 +72,6 @@ private fun PlantVillageSettings() {
 private fun ReportSettings() {
     SettingsGroup(title = stringResource(id = R.string.settings_group_reports)) {
         GeosubmitEndpointSettings()
-        CoverageLayerSettings()
         AutoUploadToggle()
         DbPruneSettings()
     }
