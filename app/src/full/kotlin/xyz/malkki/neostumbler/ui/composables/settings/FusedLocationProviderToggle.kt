@@ -36,7 +36,7 @@ fun FusedLocationProviderToggle(
     ToggleWithAction(
         title = stringResource(id = R.string.prefer_fused_location_title),
         description = stringResource(id = R.string.prefer_fused_location_description),
-        enabled = true,
+        enabled = false,
         checked = preferFusedLocationProvider,
         action = { checked ->
             settings.edit { setBoolean(PreferenceKeys.PREFER_FUSED_LOCATION, checked) }

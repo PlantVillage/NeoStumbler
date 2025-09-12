@@ -103,7 +103,7 @@ private fun ScanningSettings() {
                     context.getString(R.string.pause_scanning_on_low_battery_description, it)
                 }
             },
-            default = 0,
+            default = 20,
         )
         SliderSetting(
             title = stringResource(R.string.wifi_scan_frequency),
