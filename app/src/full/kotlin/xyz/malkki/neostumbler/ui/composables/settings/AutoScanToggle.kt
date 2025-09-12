@@ -82,7 +82,7 @@ fun AutoScanToggle(settings: Settings = koinInject()) {
 
     val enabled =
         settings
-            .getBooleanFlow(PreferenceKeys.AUTOSCAN_ENABLED, false)
+            .getBooleanFlow(PreferenceKeys.AUTOSCAN_ENABLED, true)
             .collectAsState(initial = false)
 
     val (isGoogleApiAvailable, isGoogleApiAvailabilityUserResolvable) =
