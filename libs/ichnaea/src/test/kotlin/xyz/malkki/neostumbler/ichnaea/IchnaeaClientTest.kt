@@ -57,6 +57,8 @@ class IchnaeaClientTest {
                         ),
                     wifiAccessPoints = null,
                     cellTowers = null,
+                    username = "name",
+                    email = "email",
                     bluetoothBeacons =
                         listOf(
                             BluetoothBeaconDto(

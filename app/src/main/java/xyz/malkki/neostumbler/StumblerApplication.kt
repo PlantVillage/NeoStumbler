@@ -194,6 +194,10 @@ class StumblerApplication : Application() {
 
         setupBeaconLibrary()
 
+        setupWorkManager()
+    }
+
+    fun setupWorkManager() {
         val workManager = WorkManager.getInstance(this)
 
         // Schedule worker for removing old reports

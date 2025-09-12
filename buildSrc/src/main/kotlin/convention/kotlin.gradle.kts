@@ -6,7 +6,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 plugins {
-    id("com.ncorti.ktfmt.gradle")
+//    id("com.ncorti.ktfmt.gradle")
     id("io.gitlab.arturbosch.detekt")
 }
 
@@ -56,4 +56,4 @@ configurations.configureEach {
     }
 }
 
-ktfmt { kotlinLangStyle() }
+//ktfmt { kotlinLangStyle() }
