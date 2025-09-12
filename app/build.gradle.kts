@@ -1,8 +1,12 @@
+import com.mikepenz.aboutlibraries.plugin.DuplicateMode
+import com.mikepenz.aboutlibraries.plugin.DuplicateRule
+
 plugins {
     id("convention.android-app")
     alias(libs.plugins.kotlinCompose)
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.bundletool)
+    alias(libs.plugins.aboutLibraries)
 }
 
 bundletool {
@@ -29,8 +33,8 @@ android {
 
     defaultConfig {
         applicationId = "coop.plantvillage.neostumbler"
-        versionCode = 42
-        versionName = "2.1.6"
+        versionCode = 43
+        versionName = "2.1.7"
 
         androidResources {
             // Configure supported languages here to avoid including incomplete translations in the
@@ -174,13 +178,21 @@ kotlin {
     }
 }
 
+aboutLibraries {
+    offlineMode = true
+
+    library {
+        duplicationMode = DuplicateMode.MERGE
+        duplicationRule = DuplicateRule.GROUP
+    }
+}
+
 dependencies {
     implementation(project(":libs:beacon-library-utils"))
     implementation(project(":libs:geography"))
     implementation(project(":libs:ichnaea"))
     implementation(project(":libs:utils"))
     implementation(project(":libs:executors"))
-    implementation(project(":libs:broadcast-receiver-flow"))
 
     implementation(project(":app:core"))
     implementation(project(":app:core:mapper:android-location"))
@@ -188,6 +200,7 @@ dependencies {
     implementation(project(":app:data:emitter:android"))
 
     implementation(project(":app:data:airpressure:android"))
+    implementation(project(":app:data:battery:android"))
 
     implementation(project(":app:data:geocoder:android"))
 
@@ -274,6 +287,8 @@ dependencies {
     implementation(libs.fastcsv)
 
     implementation(libs.bundles.vico)
+
+    implementation(libs.bundles.aboutLibraries)
 
     "fullImplementation"(libs.playservices.cronet)
     "fullImplementation"(libs.cronetOkhttp)
