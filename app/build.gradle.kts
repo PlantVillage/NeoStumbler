@@ -33,7 +33,7 @@ android {
 
     defaultConfig {
         applicationId = "xyz.malkki.neostumbler"
-        versionCode = 43
+        versionCode = System.getProperty("version_code", "1").toInt() + 100
         versionName = "2.1.7"
 
         androidResources {
