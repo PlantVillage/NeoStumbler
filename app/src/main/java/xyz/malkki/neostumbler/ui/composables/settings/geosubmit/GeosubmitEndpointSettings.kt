@@ -144,13 +144,6 @@ private fun GeosubmitEndpointDialog(
                     ParamField(label = stringResource(R.string.api_key), state = apiKey)
                 }
 
-                Button(
-                    modifier = Modifier.align(Alignment.CenterHorizontally),
-                    onClick = { showSuggestedServicesDialog.value = true },
-                ) {
-                    Text(text = stringResource(id = R.string.suggested_services_title))
-                }
-
                 TextButton(
                     modifier = Modifier.align(Alignment.End),
                     onClick = {
