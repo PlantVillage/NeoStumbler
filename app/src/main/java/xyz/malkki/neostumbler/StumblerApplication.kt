@@ -4,6 +4,7 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.os.Handler
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.content.getSystemService
 import androidx.datastore.core.DataStore
@@ -37,6 +38,7 @@ import org.koin.core.module.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import timber.log.Timber
+import xyz.malkki.neostumbler.Defaults.WORK_REQUIRES_DEVICE_IDLE
 import xyz.malkki.neostumbler.beaconlibrary.IBeaconParser
 import xyz.malkki.neostumbler.beaconlibrary.StubDistanceCalculator
 import xyz.malkki.neostumbler.crashlog.CrashLogManager
@@ -194,12 +196,13 @@ class StumblerApplication : Application() {
 
         setupBeaconLibrary()
 
+        setupNotificationChannels()
         setupWorkManager()
     }
 
     fun setupWorkManager() {
         val workManager = WorkManager.getInstance(this)
-
+        workManager.cancelUniqueWork(ReportSendWorker.PERIODIC_WORK_NAME)
         // Schedule worker for removing old reports
         workManager.enqueueUniquePeriodicWork(
             DbPruneWorker.PERIODIC_WORK_NAME,
@@ -224,7 +227,7 @@ class StumblerApplication : Application() {
                         requiredNetworkType = NetworkType.CONNECTED,
                         requiresCharging = false,
                         requiresStorageNotLow = false,
-                        requiresDeviceIdle = true,
+                        requiresDeviceIdle = WORK_REQUIRES_DEVICE_IDLE,
                         requiresBatteryNotLow = true,
                     )
                 )
@@ -237,7 +240,6 @@ class StumblerApplication : Application() {
             workRequest,
         )
 
-        setupNotificationChannels()
     }
 
     private fun setupNotificationChannels() {

@@ -15,13 +15,15 @@ import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import kotlin.enums.enumEntries
 import kotlin.time.Duration.Companion.hours
+import kotlin.time.Duration.Companion.minutes
 import kotlin.time.toJavaDuration
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import xyz.malkki.neostumbler.Defaults.WORK_REQUIRES_DEVICE_IDLE
 import xyz.malkki.neostumbler.R
 import xyz.malkki.neostumbler.ichnaea.ReportSendWorker
 
-val UPLOAD_INTERVAL = 1.hours
+val UPLOAD_INTERVAL = 15.minutes
 
 private enum class AutoUploadMode(@StringRes val description: Int) {
     NEVER(R.string.send_reports_automatically_never),
@@ -74,7 +76,7 @@ fun AutoUploadToggle() {
                                     },
                                 requiresCharging = false,
                                 requiresStorageNotLow = false,
-                                requiresDeviceIdle = true,
+                                requiresDeviceIdle = WORK_REQUIRES_DEVICE_IDLE,
                                 requiresBatteryNotLow = true,
                             )
                         )
