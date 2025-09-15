@@ -4,12 +4,14 @@ import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.res.stringResource
+import java.lang.ProcessBuilder.Redirect.to
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import org.koin.compose.koinInject
 import xyz.malkki.neostumbler.R
 import xyz.malkki.neostumbler.constants.PreferenceKeys
+import xyz.malkki.neostumbler.constants.PreferenceKeys.PREFER_FUSED_LOCATION_DEFAULT
 import xyz.malkki.neostumbler.data.settings.Settings
 import xyz.malkki.neostumbler.scanner.passive.PassiveScanManager
 import xyz.malkki.neostumbler.ui.composables.ToggleWithAction
@@ -17,7 +19,7 @@ import xyz.malkki.neostumbler.ui.composables.ToggleWithAction
 private fun Settings.fusedProviderAndPassiveScanEnabled(): Flow<Pair<Boolean, Boolean>> =
     getSnapshotFlow()
         .map { prefs ->
-            val fused = prefs.getBoolean(PreferenceKeys.PREFER_FUSED_LOCATION) != false
+            val fused = prefs.getBoolean(PreferenceKeys.PREFER_FUSED_LOCATION) ?: PREFER_FUSED_LOCATION_DEFAULT
             val passive = prefs.getBoolean(PreferenceKeys.PASSIVE_SCAN_ENABLED) == true
 
             fused to passive
@@ -30,7 +32,7 @@ fun FusedLocationProviderToggle(
     passiveScanManager: PassiveScanManager = koinInject(),
 ) {
     val state =
-        settings.fusedProviderAndPassiveScanEnabled().collectAsState(initial = true to false)
+        settings.fusedProviderAndPassiveScanEnabled().collectAsState(initial = PREFER_FUSED_LOCATION_DEFAULT to false)
     val (preferFusedLocationProvider, passiveScanEnabled) = state.value
 
     ToggleWithAction(

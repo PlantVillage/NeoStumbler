@@ -5,6 +5,8 @@ object PreferenceKeys {
     const val AUTOSCAN_ENABLED = "autoscan_enabled"
     const val PREFER_FUSED_LOCATION = "prefer_fused_location"
 
+    const val PREFER_FUSED_LOCATION_DEFAULT = false
+
     const val PASSIVE_SCAN_ENABLED = "passive_scan_enabled"
 
     const val IGNORE_SCAN_THROTTLING = "ignore_scan_throttling"
