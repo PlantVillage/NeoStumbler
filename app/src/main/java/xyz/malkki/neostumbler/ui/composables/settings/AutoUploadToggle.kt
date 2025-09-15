@@ -23,7 +23,7 @@ import xyz.malkki.neostumbler.Defaults.WORK_REQUIRES_DEVICE_IDLE
 import xyz.malkki.neostumbler.R
 import xyz.malkki.neostumbler.ichnaea.ReportSendWorker
 
-val UPLOAD_INTERVAL = 15.minutes
+val UPLOAD_INTERVAL = 1.hours
 
 private enum class AutoUploadMode(@StringRes val description: Int) {
     NEVER(R.string.send_reports_automatically_never),
