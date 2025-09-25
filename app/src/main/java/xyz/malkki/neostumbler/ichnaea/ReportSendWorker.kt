@@ -81,13 +81,13 @@ class ReportSendWorker(appContext: Context, params: WorkerParameters) :
 
         val reportSender =
             ReportSender(
+                settings = settings,
                 geosubmit = geosubmit,
                 reportProvider = reportProvider,
                 reportSaver = reportSaver,
             )
 
-        val sendWithReducedMetadata =
-            settings.getBooleanFlow(PreferenceKeys.REDUCED_METADATA, false).first()
+        val sendWithReducedMetadata = false;
 
         val reupload =
             inputData.hasKeyWithValueOfType<Long>(INPUT_REUPLOAD_FROM) &&

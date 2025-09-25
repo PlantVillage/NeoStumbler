@@ -33,7 +33,7 @@ class RescheduleReceiver : BroadcastReceiver(), KoinComponent {
             val appContext = context.applicationContext as StumblerApplication
 
             val autoScanEnabled = runBlocking {
-                settings.getBooleanFlow(PreferenceKeys.AUTOSCAN_ENABLED, false).first()
+                settings.getBooleanFlow(PreferenceKeys.AUTOSCAN_ENABLED, true).first()
             }
             val autoScanPermissionsGranted = PermissionHelper.hasAutoScanPermissions(appContext)
 

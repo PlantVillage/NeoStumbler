@@ -73,7 +73,6 @@ import xyz.malkki.neostumbler.extensions.defaultLocale
 import xyz.malkki.neostumbler.extensions.getQuantityString
 import xyz.malkki.neostumbler.geography.LatLng
 import xyz.malkki.neostumbler.scanner.ScannerService
-import xyz.malkki.neostumbler.ui.composables.MLSWarningDialog
 import xyz.malkki.neostumbler.ui.composables.ReportUploadButton
 import xyz.malkki.neostumbler.ui.composables.reports.ForegroundScanningButton
 import xyz.malkki.neostumbler.ui.composables.reports.GpsStatus
@@ -94,8 +93,6 @@ fun ReportsScreen(viewModel: ReportsViewModel = koinViewModel()) {
     val density = LocalDensity.current
 
     var cardHeight by remember { mutableStateOf(0.dp) }
-
-    MLSWarningDialog()
 
     Box(modifier = Modifier.fillMaxSize()) {
         Column(

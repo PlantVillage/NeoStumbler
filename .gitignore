@@ -235,3 +235,5 @@ app/release/
 
 ## Release build script
 build_release.sh
+
+.DS_Store

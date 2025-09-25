@@ -7,6 +7,7 @@ import org.koin.core.module.Module
 import org.koin.dsl.module
 import timber.log.Timber
 import xyz.malkki.neostumbler.constants.PreferenceKeys
+import xyz.malkki.neostumbler.constants.PreferenceKeys.PREFER_FUSED_LOCATION_DEFAULT
 import xyz.malkki.neostumbler.data.location.FusedLocationSource
 import xyz.malkki.neostumbler.data.location.LocationSource
 import xyz.malkki.neostumbler.data.location.PlatformLocationSource
@@ -15,7 +16,7 @@ import xyz.malkki.neostumbler.data.settings.getBooleanFlow
 import xyz.malkki.neostumbler.extensions.isGoogleApisAvailable
 
 private fun Settings.preferFusedLocation(): Boolean = runBlocking {
-    getBooleanFlow(PreferenceKeys.PREFER_FUSED_LOCATION, true).first()
+    getBooleanFlow(PreferenceKeys.PREFER_FUSED_LOCATION, PREFER_FUSED_LOCATION_DEFAULT).first()
 }
 
 val locationModule: Module = module {

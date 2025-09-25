@@ -49,7 +49,7 @@ fun MovementDetectorSettings(settings: Settings = koinInject()) {
 
     val movementDetectorType =
         settings
-            .getEnumFlow(PreferenceKeys.MOVEMENT_DETECTOR, MovementDetectorType.LOCATION)
+            .getEnumFlow(PreferenceKeys.MOVEMENT_DETECTOR, MovementDetectorType.SIGNIFICANT_MOTION)
             .collectAsState(initial = null)
 
     if (movementDetectorType.value != null) {

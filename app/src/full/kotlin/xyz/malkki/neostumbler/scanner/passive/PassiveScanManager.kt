@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import timber.log.Timber
 import xyz.malkki.neostumbler.constants.PreferenceKeys
+import xyz.malkki.neostumbler.constants.PreferenceKeys.PREFER_FUSED_LOCATION_DEFAULT
 import xyz.malkki.neostumbler.data.settings.Settings
 import xyz.malkki.neostumbler.data.settings.getBooleanFlow
 import xyz.malkki.neostumbler.extensions.isGoogleApisAvailable
@@ -29,7 +30,7 @@ class PassiveScanManager(private val context: Context, private val settings: Set
         disablePassiveScanning()
 
         val preferFusedLocationProvider = runBlocking {
-            settings.getBooleanFlow(PreferenceKeys.PREFER_FUSED_LOCATION, true).first()
+            settings.getBooleanFlow(PreferenceKeys.PREFER_FUSED_LOCATION, PREFER_FUSED_LOCATION_DEFAULT).first()
         }
 
         if (context.isGoogleApisAvailable() && preferFusedLocationProvider) {

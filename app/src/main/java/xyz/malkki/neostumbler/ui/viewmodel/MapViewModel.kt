@@ -90,7 +90,7 @@ class MapViewModel(
 
     val coverageTileJsonUrl: Flow<String?> =
         settings.getSnapshotFlow().map { prefs ->
-            val coverageLayerEnabled = prefs.getBoolean(PreferenceKeys.COVERAGE_LAYER_ENABLED)
+            val coverageLayerEnabled = false
 
             if (coverageLayerEnabled != false) {
                 prefs.getString(PreferenceKeys.COVERAGE_TILE_JSON_URL)

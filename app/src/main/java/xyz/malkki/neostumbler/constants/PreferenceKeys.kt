@@ -5,6 +5,8 @@ object PreferenceKeys {
     const val AUTOSCAN_ENABLED = "autoscan_enabled"
     const val PREFER_FUSED_LOCATION = "prefer_fused_location"
 
+    const val PREFER_FUSED_LOCATION_DEFAULT = false
+
     const val PASSIVE_SCAN_ENABLED = "passive_scan_enabled"
 
     const val IGNORE_SCAN_THROTTLING = "ignore_scan_throttling"
@@ -39,5 +41,7 @@ object PreferenceKeys {
 
     // Privacy options
     const val WIFI_FILTER_LIST = "wifi_filter_list"
-    const val REDUCED_METADATA = "reduced_metadata"
+
+    const val USERNAME = "user name"
+    const val USER_EMAIL = "user email"
 }

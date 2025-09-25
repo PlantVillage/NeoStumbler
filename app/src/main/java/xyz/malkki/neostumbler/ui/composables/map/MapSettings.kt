@@ -156,16 +156,6 @@ private fun MapSettingsDialog(
                     state = selectedStyleUrl,
                 )
             }
-
-            HorizontalDivider()
-
-            Column(modifier = Modifier.padding(all = 8.dp)) {
-                SettingsToggle(
-                    title = stringResource(R.string.map_show_coverage_layer),
-                    preferenceKey = PreferenceKeys.COVERAGE_LAYER_ENABLED,
-                    default = true,
-                )
-            }
         }
     }
 }

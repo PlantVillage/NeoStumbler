@@ -4,6 +4,8 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.os.Handler
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.content.getSystemService
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -19,6 +21,7 @@ import kotlin.io.path.deleteIfExists
 import kotlin.io.path.deleteRecursively
 import kotlin.io.path.exists
 import kotlin.properties.Delegates
+import kotlin.time.toJavaDuration
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
@@ -35,6 +38,7 @@ import org.koin.core.module.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import timber.log.Timber
+import xyz.malkki.neostumbler.Defaults.WORK_REQUIRES_DEVICE_IDLE
 import xyz.malkki.neostumbler.beaconlibrary.IBeaconParser
 import xyz.malkki.neostumbler.beaconlibrary.StubDistanceCalculator
 import xyz.malkki.neostumbler.crashlog.CrashLogManager
@@ -65,9 +69,11 @@ import xyz.malkki.neostumbler.db.RoomReportStorageMetadataProvider
 import xyz.malkki.neostumbler.export.CsvExporter
 import xyz.malkki.neostumbler.extensions.getTextCompat
 import xyz.malkki.neostumbler.http.getCallFactory
+import xyz.malkki.neostumbler.ichnaea.ReportSendWorker
 import xyz.malkki.neostumbler.location.locationModule
 import xyz.malkki.neostumbler.scanner.passive.passiveScanningModule
 import xyz.malkki.neostumbler.scanner.postprocess.postProcessorsModule
+import xyz.malkki.neostumbler.ui.composables.settings.UPLOAD_INTERVAL
 import xyz.malkki.neostumbler.ui.viewmodel.MapViewModel
 import xyz.malkki.neostumbler.ui.viewmodel.ReportsViewModel
 import xyz.malkki.neostumbler.ui.viewmodel.StatisticsViewModel
@@ -190,8 +196,13 @@ class StumblerApplication : Application() {
 
         setupBeaconLibrary()
 
-        val workManager = WorkManager.getInstance(this)
+        setupNotificationChannels()
+        setupWorkManager()
+    }
 
+    fun setupWorkManager() {
+        val workManager = WorkManager.getInstance(this)
+        workManager.cancelUniqueWork(ReportSendWorker.PERIODIC_WORK_NAME)
         // Schedule worker for removing old reports
         workManager.enqueueUniquePeriodicWork(
             DbPruneWorker.PERIODIC_WORK_NAME,
@@ -209,7 +220,26 @@ class StumblerApplication : Application() {
                 .build(),
         )
 
-        setupNotificationChannels()
+        val workRequest =
+            PeriodicWorkRequestBuilder<ReportSendWorker>(UPLOAD_INTERVAL.toJavaDuration())
+                .setConstraints(
+                    Constraints(
+                        requiredNetworkType = NetworkType.CONNECTED,
+                        requiresCharging = false,
+                        requiresStorageNotLow = false,
+                        requiresDeviceIdle = WORK_REQUIRES_DEVICE_IDLE,
+                        requiresBatteryNotLow = true,
+                    )
+                )
+                .build()
+
+        // Schedule automatic report uploading to the configured endpoint
+        workManager.enqueueUniquePeriodicWork(
+            ReportSendWorker.PERIODIC_WORK_NAME,
+            ExistingPeriodicWorkPolicy.UPDATE,
+            workRequest,
+        )
+
     }
 
     private fun setupNotificationChannels() {
